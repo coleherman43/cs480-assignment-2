@@ -1,1 +1,7 @@
 # cs480-assignment-2
+
+Kobe Pane: I added the ghost indicator arrow gameplay element. The red arrow points in the direction of the nearest enemy ghost relative to the players view. The arrow also fades to become more or less visible to the player depending on the distance from the nearest ghost. If the nearest ghost is close by, the arrow becomes a brighter red. If the nearest ghost is far away, the arrow is more transparent. 
+
+Dot Product: The dot product was used to determine the direction of the nearest ghost, relative to the player's view. This was part of the implementation of the ghost indicator arrow. I first took the normalized direction vector from the player to the ghost and computed the dot product with the main cameras forward and right vectors. Then, knowing these two dot products, an angle was computed to represent the direction of the ghost from the player. The arrow then rotates to point at the ghost, based off that computed angle.
+
+Linear Interpolation: Linear interpolation was used to map the distance from the nearest ghost to the player, to an opacity for the ghost indicator arrow. This was done by normalizing the distance and applying the Mathf.Lerp method. When the nearest ghost is far away from the player, the arrow is transparent, and as it gets closer the arrow becomes more opaque.
