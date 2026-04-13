@@ -1,0 +1,19 @@
+William Jurewitz 4/13/26
+
+This file is to log the changes made/content added for the sound on trigger requirement of the project.
+
+For the sound trigger I decided to create a heartbeat sound that plays when the player is close to a ghost.
+This is handled by a sphere trigger collider on the player. The collider is part of a 'Zone' empty object attached
+to the John Lemon prefab object. There is a new audio source on the John Lemon parent object as well.
+
+The trigger detects when ghosts enter or exit the sphere utilizing a new tag 'Ghost' I added. When there is at least
+one ghost in the trigger the heartbeat will play, when there are none it will stop.
+
+To orchestrate this I had to make some changes to the collision logic for the player detection. The ghosts use a 
+'point of view' prefab object to detect the player, however that was detecting my trigger collider, which made
+the detection happen from really far away. I solved this by creating a new physics layer called ghostDetection.
+I then put the 'Zone' object on that physics layer and made it so the 'point of view' object does not interact with
+that layer by adding it to the exclusion list on its collider. This approach seemed best as it makes as little change
+as possible to the original prefabs, focusing on adding as opposed to changing to hopefully keep merging simple.
+
+All logic is handled in a new script heartTrigger. The sound is in audio/SFXHeartbeat.
