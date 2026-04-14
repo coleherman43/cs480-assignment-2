@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Define an array of GameObjects to hold all of the ghosts
     GameObject[] ghosts;
+    public float closestDist = float.PositiveInfinity; // Shared with heartTrigger
 
     void Start ()
     {
@@ -59,10 +60,9 @@ public class PlayerMovement : MonoBehaviour
 
 
         // Initialize variables to hold the closest Ghost distance and the index of that ghost
-        float closestDist = float.PositiveInfinity;
+        closestDist = float.PositiveInfinity;
         int ghostIdx = 0;
         Vector3 toGhost = Vector3.zero;
-
         // Loop through all the ghosts
         for (int i = 0 ; i < ghosts.Length ; i++)
         {
