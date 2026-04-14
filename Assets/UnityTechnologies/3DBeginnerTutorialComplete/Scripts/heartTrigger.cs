@@ -3,10 +3,10 @@ using UnityEngine;
 public class heartTrigger : MonoBehaviour
 {
     public AudioSource heart; //Audio player object, on John Lemon
-    public PlayerMovement playerMovement; // Reference to grab closestDist from Kobe's logic
+    public PlayerMovement playerMovement; // Reference to grab closestDist from PlayerMovement logic
     public float minDistance = 3f;  // Full volume at this distance or closer
-    public float maxDistance = 7.5f; // Silent at this distance or farther — matches Kobe's maxDist
-    public float smoothSpeed = 2f; // Adjust in Inspector to taste
+    public float maxDistance = 7.5f; // Silent at this distance or farther (matches maxDist from PlayerMovement)
+    public float smoothSpeed = 2f; // How quickly volume changes based on ghost proximity (higher = faster adjustment)
 
     private short num = 0; // Track # ghosts in circle (stops a ghost from ending noise if another ghost is still inside range)
     private float targetVolume = 0f; // Target volume to lerp toward
@@ -22,7 +22,7 @@ public class heartTrigger : MonoBehaviour
         // Only check distance if a ghost is in the trigger zone
         if (num > 0)
         {
-            // Reuse Kobe's already-computed nearest ghost distance from PlayerMovement
+            // Reuse Kobe's nearest ghost distance from PlayerMovement
             targetVolume = Mathf.InverseLerp(maxDistance, minDistance, playerMovement.closestDist);
         }
         else
